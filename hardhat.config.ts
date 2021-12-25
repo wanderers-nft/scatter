@@ -23,21 +23,29 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.4",
+  solidity: {
+    version: "0.8.6",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000
+      }
+    }
+  },
+
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    },
+    polygon: {
+      url: "https://polygon-rpc.com/",
+      accounts: {
+        // 0xF8256AD6ADdB0E7a956cf61D14e5D53c78e65621
+        mnemonic: process.env.MNEMONIC !== undefined ? process.env.MNEMONIC : ""
+      }
+    }
   },
-  gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
-    currency: "USD",
-  },
+
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-  },
+    apiKey: process.env.POLYGONSCAN !== undefined ? process.env.POLYGONSCAN : ""
+  }
 };
 
 export default config;
