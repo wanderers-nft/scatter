@@ -34,6 +34,14 @@ const config: HardhatUserConfig = {
   },
 
   networks: {
+    mumbai: {
+      url: "https://polygon-mumbai.g.alchemy.com/v2/3Xz8mWItuQp9wEnkQErOHD5KpYSnEJy2",
+      accounts: {
+        // 0xF8256AD6ADdB0E7a956cf61D14e5D53c78e65621
+        mnemonic: process.env.MNEMONIC !== undefined ? process.env.MNEMONIC : ""
+      }
+    },
+
     polygon: {
       url: "https://polygon-rpc.com/",
       accounts: {
